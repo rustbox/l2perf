@@ -281,12 +281,18 @@ fn main() {
         .find(|iface| iface.name == opt.ifname)
         .expect("Network interface not found");
 
-    let mut config: Config = Default::default();
+    let mut config = Config {
+        // write_buffer_size: 128 * 1024 * 1024,
+        read_buffer_size: 128 * 1024 * 1024,
+        ..Default::default()
+    };
 
     if opt.rx {
         config.channel_type = ChannelType::Layer3(opt.ethertype);
         config.read_timeout = Some(Duration::from_secs(2));
     }
+
+    let config = config;
 
     let (mut tx, mut rx) = match datalink::channel(&interface, config) {
         Ok(Ethernet(tx, rx)) => (tx, rx),

@@ -2,9 +2,24 @@
 name = "l2perf"
 version = "0.1.0"
 authors = ["Vzaa <Vzaa@users.noreply.github.com>"]
-edition = "2018"
+edition = "2021"
+default-run = "l2perf"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "l2perf"
+
+[[bin]]
+name = "reflect"
+path = "tools/reflect.rs"
+
+[[bin]]
+name = "pcap"
+path = "tools/pcap.rs"
+
+[[bin]]
+name = "tpg"
+path = "tools/tpg.rs"
 
 [dependencies]
 pnet = "0.35"
@@ -12,3 +27,4 @@ structopt = "0.3"
 rand = "0.8"
 serde = { version = "1.0", features = ["derive"] }
 bincode = "1.3"
+hex = "0.4.3"
